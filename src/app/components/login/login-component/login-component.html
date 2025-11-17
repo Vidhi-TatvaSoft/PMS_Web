@@ -1,0 +1,29 @@
+<h2>Login</h2>
+<hr>
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+
+  <div>
+    <label for="email">Email*</label><br>
+    <input type="text" name="email" [(ngModel)]="login.email" #email="ngModel" placeholder="Email" required
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+    <div *ngIf="email?.hasError('required') && email?.touched" class="validation">Email is Required.</div>
+    <div *ngIf="email?.hasError('pattern') && email?.touched" class="validation">Enter valid email.</div>
+
+  </div>
+  <br>
+
+  <div>
+    <label for="password">Password*</label><br>
+    <input type="password" name="password" [(ngModel)]="login.password" #password="ngModel" placeholder="Password" required>
+    <div *ngIf="password?.hasError('required') && password?.touched" class="validation">Password is Required.</div>
+  </div>
+  <br>
+
+  <!-- Submit Button -->
+  <app-reusable-button-component btnClass="btn btn-success" label="Login" type="submit">
+  </app-reusable-button-component>
+
+</form>
+<div>
+
+</div>

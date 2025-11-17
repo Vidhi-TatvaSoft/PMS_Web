@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-between">
+<h3>{{ isEditMode ? 'Edit Category' : 'Add Category'}}</h3>
+<a [routerLink]="['/category/list']" routerLinkActive="active" class="btn btn-outline-success">Category List</a>
+</div>
+
+<!-- form -->
+<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" novalidate>
+
+  <input type="hidden" name="id" [(ngModel)]="category.id" #id="ngModel" />
+
+  <div>
+    <label for="name">Name*</label><br>
+    <input type="text" name="name" [(ngModel)]="category.name" #name="ngModel" placeholder="Name" required>
+    <div *ngIf="name?.hasError('required') && name?.touched" class="validation">Name is
+      Required.</div>
+  </div>
+  <br>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-success">
+    {{ isEditMode ? 'Update Category' : 'Add Category' }}
+  </button>
+  <input type="reset" value="reset" *ngIf="!isEditMode" class="btn btn-danger">
+  <br>
+
+</form>

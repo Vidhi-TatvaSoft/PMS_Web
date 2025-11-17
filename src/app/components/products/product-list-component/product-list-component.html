@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-between">
+  <h3>Product list</h3>
+  <app-reusable-button-component label="Add Product" route="/product/add"></app-reusable-button-component>
+  <!-- <a [routerLink]="['/product/add']" routerLinkActive="active" class="btn btn-outline-success">Add Product</a> -->
+
+</div>
+<br>
+
+<div>Search: <input type="text" name="searchProduct" id="searchProduct" [(ngModel)]="filters.search"
+    placeholder="search by category, name" (ngModelChange)="onSearchChange()"></div>
+<br>
+<div>Select category: <select name="selectCategory " id="selectCategory" [(ngModel)]="filters.categorySelect"
+    (change)="getAllProducts()">
+    <option [ngValue]="null">Select category</option>
+    <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.name}}</option>
+  </select>
+</div>
+<br>
+<div>
+  fromdate: <input type="date" name="fromDate" id="fromDate" [(ngModel)]="filters.fromDate" (change)="getAllProducts()">
+  todate: <input type="date" name="toDate" id="toDate" [(ngModel)]="filters.toDate" (change)="getAllProducts()">
+</div>
+<br>
+
+<table class="table ">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name
+        <button (click)="onSort('name','asc')" data-column="name" data-order="asc">asc</button>
+        <button (click)="onSort('name','desc')" data-column="name" data-order="desc">desc</button>
+      </th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Stock</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    @if(products.length == 0){
+    <tr>
+      <td colspan="10" class="text-center">No product found</td>
+    </tr>
+    }
+    @else{
+    @for(product of products; track product.id){
+    <tr>
+      <td>{{product.id}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.categoryName}}</td>
+      <td>{{product.stock}}</td>
+      <td>{{product.description}}</td>
+      <td>
+        @if(product.imagePath){
+        <app-reusable-image-component [imgSrc]="imageBaseUrl + product.imagePath" imgAlt="image" [imgHeight]="25"
+          [imgWidth]="25"></app-reusable-image-component>
+        <!-- <img src="{{imageBaseUrl + product.imagePath}}" alt="image" height="25" width="25"> -->
+        }
+        @else{
+        -
+        }
+      </td>
+      <td>{{product.createdAt | date:'dd-MM-yyyy' }}</td>
+      <td>{{product.updatedAt | date:'dd-MM-yyyy' }}</td>
+      <td>
+        <app-reusable-button-component label="Edit" route="/product/edit"
+          [routeId]="product.id"></app-reusable-button-component>
+        <!-- <a [routerLink]="['/product/edit', product.id]" routerLinkActive="active"
+          class="btn btn-outline-success me-1">Edit</a> -->
+        <app-reusable-button-component label="Delete" (clicked)="confirmDelete(product.id, product.name)"
+          btnClass="btn btn-outline-danger"></app-reusable-button-component>
+        <!-- <button (click)="confirmDelete(product.id, product.name)" class="btn btn-outline-danger">Delete</button> -->
+      </td>
+    </tr>
+    }
+    }
+    <tr></tr>
+  </tbody>
+</table>
