@@ -62,6 +62,8 @@ export class ProductInlineEdit {
   loadProducts() {
     this.productService.getAllProducts(this.filters).subscribe(data => {
       this.products = data;
+      this.invalidImages = new Array(this.products.length).fill(false);
+      this.previewUrls = new Array(this.products.length).fill(null);
 
       // Create form array
       this.productsForm = this.fb.array(
@@ -88,6 +90,9 @@ export class ProductInlineEdit {
         categoryId: p.categoryId,
         imageFile: null
       });
+      // Reset validation and preview for this row
+      this.invalidImages[this.editRowIndex] = false;
+      this.previewUrls[this.editRowIndex] = null;
     }
     this.editRowIndex = null;
   }
@@ -152,8 +157,8 @@ export class ProductInlineEdit {
 
         if (data.isSuccess) {
           this.toast.success(data.message)
-          this.loadProducts();
           this.cancelEdit();
+          this.loadProducts();
         } else {
           this.toast.error(data.message)
         }
