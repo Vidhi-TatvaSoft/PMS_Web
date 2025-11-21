@@ -1,0 +1,9 @@
+<div style="background: rgb(226, 241, 239);" class="">
+  <div *ngFor="let item of data | keyvalue">
+    <strong *ngIf="item.value != null">{{ item.key }}:</strong> {{ item.value }}
+  </div>
+  <!-- <div><strong>Stock:</strong> {{data?.stock}}</div>
+  <div><strong>Description:</strong> {{data?.description}}</div>
+  <div><strong>CreatedAt:</strong> {{data?.createdAt}}</div>
+  <div><strong>UpdatedAt:</strong> {{data?.updatedAt}}</div> -->
+</div>

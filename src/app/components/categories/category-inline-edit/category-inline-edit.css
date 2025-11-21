@@ -1,0 +1,18 @@
+.editable-cell {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.editable-cell:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+table {
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+}

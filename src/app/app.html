@@ -1,6 +1,9 @@
-<div>
+<div class="d-flex justify-content-between">
   <h1>PMS</h1>
-  <button id="logout-btn" (click)="logout()">Logout</button>
+  <div>
+    <a class="btn btn-info" routerLink="rxjs-demo">RxJs</a>
+    <a class="btn btn-success" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
+  </div>
 </div>
 <hr>
 <!-- <nav>

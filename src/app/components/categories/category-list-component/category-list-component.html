@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
   <h3>Category list</h3>
-  <a [routerLink]="['/category/add']" routerLinkActive="active" class="btn btn-outline-success">Add Category</a>
+  <a [routerLink]="['/dashboard/category/add']" routerLinkActive="active" class="btn btn-outline-success">Add Category</a>
 </div>
 <br>
 
@@ -8,7 +8,7 @@
     (ngModelChange)="onSearchCategory()"></div>
 <br>
 
-<table class="table ">
+<table class="table " >
   <thead>
     <tr>
       <th>Id</th>
@@ -33,7 +33,7 @@
         <td>{{category.createdAt | date:'dd-MM-yyyy' }}</td>
         <td>{{category.updatedAt | date:'dd-MM-yyyy' }}</td>
         <td>
-          <a [routerLink]="['/category/edit', category.id]" routerLinkActive="active"
+          <a [routerLink]="['/dashboard/category/edit', category.id]" routerLinkActive="active"
             class="btn btn-outline-success me-1">Edit</a>
           <button  *ngIf="roleService.isAdmin()" class="btn btn-outline-danger" (click)="confirmDelete(category.id, category.name)">Delete</button>
         </td>

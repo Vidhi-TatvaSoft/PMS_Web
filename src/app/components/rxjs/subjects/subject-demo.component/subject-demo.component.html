@@ -1,0 +1,27 @@
+<div class="p-3">
+  <h2>Subject & Its Types</h2>
+
+  <!-- Buttons -->
+  <div class="">
+    <button class="btn btn-success me-2" (click)="selectType('Subject')">Subject</button>
+    <button class="btn btn-success me-2" (click)="selectType('Behavior')">BehaviorSubject</button>
+    <button class="btn btn-success me-2" (click)="selectType('Replay')">ReplaySubject</button>
+    <button class="btn btn-success me-2" (click)="selectType('Async')">AsyncSubject</button>
+  </div>
+
+  <hr />
+
+  <!-- Definition box -->
+  <div class="box" *ngIf="selectedType">
+    <h3>{{ selectedType }}</h3>
+    <div [innerHTML]="typeDefinition"></div>
+    <button class="btn btn-success mt-2" (click)="runDemo()">Run Demo</button>
+  </div>
+
+  <!-- Output -->
+  <div class="output" *ngIf="output">
+    <h4>Output:</h4>
+    <pre [innerHTML]="output"></pre>
+  </div>
+
+</div>

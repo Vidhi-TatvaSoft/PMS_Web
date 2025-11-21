@@ -41,7 +41,7 @@ export class CategoryFormComponent {
             this.category = data.data;
           } else {
             sessionStorage.setItem('toastMessage', JSON.stringify(data));
-            this.router.navigate(['/category/list']);
+            this.router.navigate(['/dashboard/category/list']);
           }
         },
         error: (err) => console.error('API Error:', err),
@@ -63,7 +63,7 @@ export class CategoryFormComponent {
 
           if (data.isSuccess) {
             sessionStorage.setItem('toastMessage', JSON.stringify(data));
-            this.router.navigate(['/category/list']);
+            this.router.navigate(['/dashboard/category/list']);
           } else {
             this.toast.error(data.message)
           }

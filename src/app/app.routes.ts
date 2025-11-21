@@ -11,11 +11,33 @@ import { PageNotFoundComponent } from './components/error-pages/page-not-found/p
 import { UnAuthorizePageComponent } from './components/error-pages/unauthorize-page/un-authorize-page-component/un-authorize-page-component';
 import { authGuardGuard } from './authGuards/authGuard/auth-guard-guard';
 import { noAuthGuard } from './authGuards/no-auth/no-auth-guard';
-import { roleGuard } from './authGuards/role-guard/role-guard';
 import { ForbidenComponent } from './components/error-pages/forbidden/forbiden-component/forbiden-component';
+import { ObservableDemoComponent } from './components/rxjs/observable/observable-demo.component/observable-demo.component';
+import { RxjsHomeComponent } from './components/rxjs/homepage/rxjs-home.component/rxjs-home.component';
+import { SubscribeDemoComponent } from './components/rxjs/subscribe-demo.component/subscribe-demo.component';
+import { SubjectDemoComponent } from './components/rxjs/subjects/subject-demo.component/subject-demo.component';
+import { OperatorListComponent } from './components/rxjs/operators/operator-list.component/operator-list.component';
+import { MapComponent } from './components/rxjs/operators/operators.compoent/map';
+import { FilterComponent } from './components/rxjs/operators/operators.compoent/filter';
+import { TakeComponent } from './components/rxjs/operators/operators.compoent/take';
+import { SwitchMapComponent } from './components/rxjs/operators/operators.compoent/switch-map';
+import { FirstComponent } from './components/rxjs/operators/operators.compoent/first';
+import { DebounceTimeComponent } from './components/rxjs/operators/operators.compoent/debounce-time';
+import { MergeMapComponent } from './components/rxjs/operators/operators.compoent/merge-map';
+import { ConcatMapComponent } from './components/rxjs/operators/operators.compoent/concate-map';
+import { TapComponent } from './components/rxjs/operators/operators.compoent/tap';
+import { ReduceComponent } from './components/rxjs/operators/operators.compoent/reduce';
+import { OfComponent } from './components/rxjs/operators/operators.compoent/creation-operators/of';
+import { AjaxComponent } from './components/rxjs/operators/operators.compoent/creation-operators/ajax';
+import { FromEventComponent } from './components/rxjs/operators/operators.compoent/creation-operators/from-event';
+import { FromComponent } from './components/rxjs/operators/operators.compoent/creation-operators/from';
+import { IntervalComponent } from './components/rxjs/operators/operators.compoent/creation-operators/interval';
+import { TimerComponent } from './components/rxjs/operators/operators.compoent/creation-operators/timer';
+import { CategoryInlineEdit } from './components/categories/category-inline-edit/category-inline-edit';
+import { ProductInlineEdit } from './components/products/product-inline-edit/product-inline-edit';
 
 export const routes: Routes = [
-  { path: 'login', canActivate:[noAuthGuard], component: LoginComponent, title: "Login" },
+  { path: 'login', canActivate: [noAuthGuard], component: LoginComponent, title: "Login" },
   { path: 'un-authorize', component: UnAuthorizePageComponent, title: "Access denied" },
   { path: 'forbidden', component: ForbidenComponent, title: "Access denied" },
   {
@@ -26,6 +48,7 @@ export const routes: Routes = [
         component: ProductComponent,
         children: [
           { path: 'list', component: ProductListComponent, title: "Product List" },
+          { path: 'inline-edit', component: ProductInlineEdit, title: "product edit" },
           { path: 'add', component: ProductFormComponent, title: "Add Product" },
           { path: 'edit/:id', component: ProductFormComponent, title: "Edit Product" },
           { path: '', redirectTo: 'list', pathMatch: 'full' } // default child route
@@ -36,6 +59,7 @@ export const routes: Routes = [
         component: CategoryComponent,
         children: [
           { path: 'list', component: CategoryListComponent, title: "Category List" },
+          { path: 'inline-edit', component: CategoryInlineEdit, title: "Category List" },
           { path: 'add', component: CategoryFormComponent, title: "Add Category" },
           { path: 'edit/:id', component: CategoryFormComponent, title: "Edit Category" },
           { path: '', redirectTo: 'list', pathMatch: 'full' } // default child route
@@ -44,6 +68,37 @@ export const routes: Routes = [
       { path: '', redirectTo: 'product', pathMatch: 'full' }
     ]
   },
+  { path: 'rxjs-demo', component: RxjsHomeComponent, title: "RxJs" },
+  { path: 'observable', component: ObservableDemoComponent, title: "observable" },
+  { path: 'subscription', component: SubscribeDemoComponent, title: "Subscription" },
+  { path: 'subject', component: SubjectDemoComponent, title: "Subjects" },
+  {
+    path: 'operators', component: OperatorListComponent, title: "Operators",
+    children: [
+      { path: 'map', component: MapComponent, title: "Operator - Map" },
+      { path: 'filter', component: FilterComponent, title: "Operator - Filter" },
+      { path: 'take', component: TakeComponent, title: "Operator - Take" },
+      { path: 'first', component: FirstComponent, title: "Operator - First" },
+      { path: 'switch-map', component: SwitchMapComponent, title: "Operator - SwitchMap" },
+      { path: 'merge-map', component: MergeMapComponent, title: "Operator - MergeMap" },
+      { path: 'concat-map', component: ConcatMapComponent, title: "Operator - Concatemap" },
+      { path: 'debounce-time', component: DebounceTimeComponent, title: "Operator - DebounceTime" },
+      { path: 'tap', component: TapComponent, title: "Operator - Tap" },
+      { path: 'reduce', component: ReduceComponent, title: "Operator - Reduce" },
+
+      // creation
+      { path: 'of', component: OfComponent, title: "Operator - Of" },
+      { path: 'ajax', component: AjaxComponent, title: "Operator - Ajax" },
+      { path: 'from-event', component: FromEventComponent, title: "Operator - Of" },
+      { path: 'from', component: FromComponent, title: "Operator - From" },
+      { path: 'interval', component: IntervalComponent, title: "Operator - Interval" },
+      { path: 'timer', component: TimerComponent, title: "Operator - Timer" },
+
+
+      { path: '', redirectTo: 'map', pathMatch: 'full' } // default child route
+    ]
+  },
+
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // default
   {
     path: '**',

@@ -15,3 +15,15 @@ export interface ProductModel {
   categoryId: string | number | null,
   categoryName: string | null
 }
+
+export interface ProductModelPartial {
+  id: number;
+  name: string;
+  price: number;
+  imagePath?: string | null,
+  imageFile?: File | null,
+  categories: CategoryModel[] | null,
+  categoryId: string | number | null,
+  categoryName: string | null
+}
+

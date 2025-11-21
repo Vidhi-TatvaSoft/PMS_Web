@@ -1,0 +1,78 @@
+<table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Image</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let row of productsForm.controls; let i = index">
+    <ng-container [formGroup]="getFormGroup(i)">
+
+      <!-- Name -->
+      <td>
+        <input *ngIf="editRowIndex === i" formControlName="name" class="form-control"
+          [ngClass]="{'is-invalid': getFormGroup(i).get('name')?.invalid && getFormGroup(i).get('name')?.touched}" />
+        <span *ngIf="editRowIndex !== i">{{ products[i].name }}</span>
+        <div *ngIf="editRowIndex === i && getFormGroup(i).get('name')?.errors" class="text-danger small">
+          <span *ngIf="getFormGroup(i).get('name')?.hasError('required')">Name is required</span>
+          <span *ngIf="getFormGroup(i).get('name')?.hasError('minlength')">Name must be at least 3 chars</span>
+        </div>
+      </td>
+
+      <!-- Price -->
+      <td>
+        <input *ngIf="editRowIndex === i" type="number" formControlName="price" class="form-control"
+          [ngClass]="{'is-invalid': getFormGroup(i).get('price')?.invalid && getFormGroup(i).get('price')?.touched}" />
+        <span *ngIf="editRowIndex !== i">{{ products[i].price }}</span>
+        <div *ngIf="editRowIndex === i && getFormGroup(i).get('price')?.errors" class="text-danger small">
+          <span *ngIf="getFormGroup(i).get('price')?.hasError('required')">Price is required</span>
+          <span *ngIf="getFormGroup(i).get('price')?.hasError('min')">Price must be > 0</span>
+        </div>
+      </td>
+
+      <!-- Category -->
+      <td>
+        <select *ngIf="editRowIndex === i" formControlName="categoryId" class="form-control"
+          [ngClass]="{'is-invalid': getFormGroup(i).get('categoryId')?.invalid && getFormGroup(i).get('categoryId')?.touched}">
+          <option [ngValue]="null">Select Category</option>
+          <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
+        </select>
+        <span *ngIf="editRowIndex !== i">{{ products[i].categoryName }}</span>
+        <div *ngIf="editRowIndex === i && getFormGroup(i).get('categoryId')?.errors" class="text-danger small">
+          <span *ngIf="getFormGroup(i).get('categoryId')?.hasError('required')">Category is required</span>
+        </div>
+      </td>
+
+      <td>
+        <div *ngIf="editRowIndex === i">
+          <input type="file" (change)="onImageChange($event, i)" />
+
+          <!-- Invalid image message -->
+          <div *ngIf="invalidImages[i]" class="text-danger small">
+            Only PNG/JPG images are allowed.
+          </div>
+
+          <!-- Preview -->
+          <img *ngIf="previewUrls[i]" [src]="previewUrls[i]" width="50" />
+          <!-- Show current image if no new file -->
+          <img *ngIf="!previewUrls[i] && products[i].imagePath" [src]="imageBaseUrl + products[i].imagePath" width="50" />
+        </div>
+
+        <span *ngIf="editRowIndex !== i">
+          <img *ngIf="products[i].imagePath" [src]="imageBaseUrl + products[i].imagePath" width="50" />
+        </span>
+      </td>
+
+
+      <!-- Actions -->
+      <td>
+        <button *ngIf="editRowIndex !== i" class="btn btn-primary btn-sm" (click)="startEdit(i)">Edit</button>
+        <button *ngIf="editRowIndex === i" class="btn btn-success btn-sm" (click)="save(i)">Save</button>
+        <button *ngIf="editRowIndex === i" class="btn btn-secondary btn-sm ms-2" (click)="cancelEdit()">Cancel</button>
+      </td>
+
+    </ng-container>
+  </tr>
+</table>

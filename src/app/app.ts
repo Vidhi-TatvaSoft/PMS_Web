@@ -13,13 +13,8 @@ import { deleteCookie } from './core/common-methods/cookie-helper';
 })
 export class App {
   protected readonly title = signal('PMS_Web');
-  constructor(private router: Router){}
+  constructor(){}
 
 
-  logout() {
-    console.log("sdvsdv")
-    deleteCookie("authToken");
-    this.router.navigate(['/login']);
-  }
 
 }

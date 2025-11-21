@@ -1,0 +1,13 @@
+<div class="p-3">
+  <h2>Observable & Observer Demo</h2>
+  <p><strong>Observable: </strong>An Observable is a special object in RxJS that emits data over time.</p>
+  <p>It does not start until someone subscribes</p>
+  <p><strong>Observer: </strong> Observer is the object that receives data from an Observable through next(), error(), and complete() callbacks. <br>An object that defines how to handle the values from an Observable.</p>
+  <br>
+  <button (click)="startObservable()" class="btn btn-success">Run Observable</button>
+  <br><br>
+    <div class="output" *ngIf="output">
+    <h4>Output:</h4>
+    <pre [innerHTML]="output"></pre>
+  </div>
+</div>

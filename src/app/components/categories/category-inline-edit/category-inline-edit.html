@@ -1,0 +1,52 @@
+<table class="table table-bordered">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let category of categories">
+    <td>{{ category.id }}</td>
+
+    <td>
+      <!-- If row is being edited -->
+      <input *ngIf="editId === category.id"
+             [(ngModel)]="editName"
+             class="form-control"
+             [ngClass]="{'is-invalid': nameError}"
+             (blur)="validateName()" />
+
+      <!-- Read-only display -->
+      <span *ngIf="editId !== category.id">
+        {{ category.name }}
+      </span>
+
+      <!-- Validation message -->
+      <div *ngIf="nameError" class="text-danger small">
+        {{ nameError }}
+      </div>
+    </td>
+
+    <td>
+      <!-- Edit button -->
+      <button *ngIf="editId !== category.id"
+              class="btn btn-sm btn-primary"
+              (click)="startEdit(category)">
+        Edit
+      </button>
+
+      <!-- Save/Cancel buttons -->
+      <button *ngIf="editId === category.id"
+              class="btn btn-sm btn-success"
+              (click)="save(category)">
+        Save
+      </button>
+
+      <button *ngIf="editId === category.id"
+              class="btn btn-sm btn-secondary ms-2"
+              (click)="cancel()">
+        Cancel
+      </button>
+    </td>
+  </tr>
+</table>

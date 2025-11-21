@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren, ViewContainerRef, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -13,10 +13,12 @@ import { CategoryService } from '../../../services/category/category-service';
 import { filterModel } from '../../../core/models/filters-model';
 import { ReusableButtonComponent } from '../../reusable-components/reusable-button-component/reusable-button-component';
 import { ReusableImageComponent } from '../../reusable-components/reusable-image-component/reusable-image-component';
+import { ProductDetailComponent } from '../product-detail-component/product-detail-component';
+import { ProductDetailModel } from '../../../core/models/product-detail-model';
 
 @Component({
   selector: 'app-product-list-component',
-  imports: [CommonModule, RouterLink, RouterLinkActive, MatDialogModule, FormsModule, ReusableButtonComponent, ReusableImageComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive, MatDialogModule, FormsModule, ReusableButtonComponent, ReusableImageComponent, ProductDetailComponent],
   templateUrl: './product-list-component.html',
   styleUrl: './product-list-component.css',
 })
@@ -75,7 +77,8 @@ export class ProductListComponent {
   }
 
   getAllProducts() {
-    if (this.filters.fromDate && this.filters.toDate ) {
+    this.expandedIndex = null;
+    if (this.filters.fromDate && this.filters.toDate) {
       console.log("in")
       if (this.filters.fromDate < this.filters.toDate) {
         this.productService.getAllProducts(this.filters).subscribe({
@@ -89,8 +92,7 @@ export class ProductListComponent {
         this.filters.fromDate = this.formatDate(this.fromdate);
         this.filters.toDate = this.formatDate(this.toDate);
       }
-    }else{
-      console.log(this.filters)
+    } else {
       this.toast.error("Select both fromdate and two date")
     }
 
@@ -166,4 +168,30 @@ export class ProductListComponent {
   //     this.filteredProducts = this.products;
   //   }
   // }
+
+  expandedIndex: number | null = null;
+  expandData: ProductDetailModel | null = null;
+
+  toggle(index: number, product: ProductModel, event: MouseEvent) {
+    this.expandedIndex = this.expandedIndex === index ? null : index;
+
+    this.expandData = {
+      stock: product.stock,
+      description: product.description,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt
+    };
+
+    const element = event.currentTarget as HTMLElement;
+    const icon = element.querySelector("i");
+    if (!icon) return;
+
+    if (this.expandedIndex === index) {
+      icon.classList.remove("bi-caret-right-fill");
+      icon.classList.add("bi-caret-down-fill");
+    } else {
+      icon.classList.remove("bi-caret-down-fill");
+      icon.classList.add("bi-caret-right-fill");
+    }
+  }
 }

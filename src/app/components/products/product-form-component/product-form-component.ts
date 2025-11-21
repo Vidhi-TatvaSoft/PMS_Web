@@ -66,7 +66,7 @@ export class ProductFormComponent {
                 this.product = data.data;
               } else {
                 sessionStorage.setItem('toastMessage', JSON.stringify(data));
-                this.router.navigate(['/product/list']);
+                this.router.navigate(['/dashboard/product/list']);
               }
             },
             error: (err) => console.error('API Error:', err),
@@ -158,7 +158,7 @@ export class ProductFormComponent {
 
           if (data.isSuccess) {
             sessionStorage.setItem('toastMessage', JSON.stringify(data));
-            this.router.navigate(['/product/list']);
+            this.router.navigate(['/dashboard/product/list']);
           } else {
             this.toast.error(data.message)
           }

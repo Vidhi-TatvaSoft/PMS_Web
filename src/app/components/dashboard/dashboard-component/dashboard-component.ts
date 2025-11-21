@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { RoleService } from '../../../services/role/role-service';
 import { CommonModule } from '@angular/common';
+import { deleteCookie } from '../../../core/common-methods/cookie-helper';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -10,5 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './dashboard-component.css',
 })
 export class DashboardComponent {
-  constructor(public roleService: RoleService) { }
+  constructor(public roleService: RoleService, private router: Router) { }
+
+  logout() {
+    console.log("sdvsdv")
+    deleteCookie("authToken");
+    this.router.navigate(['/login']);
+  }
+
 }
