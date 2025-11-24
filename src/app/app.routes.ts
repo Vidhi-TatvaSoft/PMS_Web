@@ -34,6 +34,12 @@ import { FromComponent } from './components/rxjs/operators/operators.compoent/cr
 import { IntervalComponent } from './components/rxjs/operators/operators.compoent/creation-operators/interval';
 import { TimerComponent } from './components/rxjs/operators/operators.compoent/creation-operators/timer';
 import { ProductInlineEdit } from './components/products/product-inline-edit/product-inline-edit';
+import { CombineLatestComponent } from './components/rxjs/operators/operators.compoent/join-creation-operators/combineLatest';
+import { ConcatComponent } from './components/rxjs/operators/operators.compoent/join-creation-operators/concate';
+import { ForkJoinComponent } from './components/rxjs/operators/operators.compoent/join-creation-operators/fork-join';
+import { MergeComponent } from './components/rxjs/operators/operators.compoent/join-creation-operators/merge';
+import { ZipComponent } from './components/rxjs/operators/operators.compoent/join-creation-operators/zip';
+import { RaceComponent } from './components/rxjs/operators/operators.compoent/join-creation-operators/race';
 
 export const routes: Routes = [
   { path: 'login', canActivate: [noAuthGuard], component: LoginComponent, title: "Login" },
@@ -91,6 +97,14 @@ export const routes: Routes = [
       { path: 'from', component: FromComponent, title: "Operator - From" },
       { path: 'interval', component: IntervalComponent, title: "Operator - Interval" },
       { path: 'timer', component: TimerComponent, title: "Operator - Timer" },
+
+      //join
+      {path:'combine-latest', component: CombineLatestComponent, title:"CombineLatest"},
+      {path:'concat', component: ConcatComponent, title:"concat"},
+      {path:'fork-join', component: ForkJoinComponent, title:"forkJoin"},
+      {path:'merge', component: MergeComponent, title:"merge"},
+      {path:'zip', component: ZipComponent, title:"zip"},
+      {path:'race', component: RaceComponent, title:"race"},
 
 
       { path: '', redirectTo: 'map', pathMatch: 'full' } // default child route

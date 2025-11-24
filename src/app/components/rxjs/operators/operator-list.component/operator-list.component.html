@@ -1,29 +1,43 @@
 <div class="p-3">
-  <h2>Operators</h2>
-  <p>An RxJS Operator is a function that takes an Observable, changes the data or behavior of the stream, and returns a new Observable.</p>
-  <p>Operators help you: modify values, remove values, combine multiple streams, delay or retry, handle errors</p>
-  <div>
+  <div style="max-height: 200px; overflow: auto;">
+    <h2>Operators</h2>
+    <p>An RxJS Operator is a function that takes an Observable, changes the data or behavior of the stream, and returns
+      a
+      new Observable.</p>
+    <p>Operators help you: modify values, remove values, combine multiple streams, delay or retry, handle errors</p>
     <div>
-      <div>Craetion: </div>
+      <div>
+        <div>Craetion: </div>
         <a class="btn btn-success me-2" routerLink="/operators/of">of()</a>
         <a class="btn btn-success me-2" routerLink="/operators/from">from()</a>
         <a class="btn btn-success me-2" routerLink="/operators/ajax">ajax()</a>
-        <a class="btn btn-success me-2" routerLink="/operators/timer">timer()</a>
+        <a class="btn btn-success me-2" routerLink="/operators/timer">timer()</a> 
         <a class="btn btn-success me-2" routerLink="/operators/from-event">from-event()</a>
         <a class="btn btn-success me-2" routerLink="/operators/interval">interval()</a>
+      </div>
+      <br>
+      <div>
+        <div>Join-creation:</div>
+        <a class="btn btn-success me-2" routerLink="/operators/combine-latest">CombineLatest()</a>
+        <a class="btn btn-success me-2" routerLink="/operators/concat">concat()</a>
+        <a class="btn btn-success me-2" routerLink="/operators/fork-join">forkJoin()</a>
+        <a class="btn btn-success me-2" routerLink="/operators/merge">merge()</a>
+        <a class="btn btn-success me-2" routerLink="/operators/zip">zip()</a>
+        <a class="btn btn-success me-2" routerLink="/operators/race">race()</a>
+      </div>
+      <br>
+      <a class="btn btn-success me-2" routerLink="/operators/map">map()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/filter">filter()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/take">take()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/first">first()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/switch-map">switchMap()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/merge-map">mergeMap()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/concat-map">concatMap()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/debounce-time">DebounceTime()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/tap">tap()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/reduce">reduce()</a>
+      <a class="btn btn-success me-2" routerLink="/operators/of">of()</a>
     </div>
-    <br>
-    <a class="btn btn-success me-2" routerLink="/operators/map">map()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/filter">filter()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/take">take()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/first">first()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/switch-map">switchMap()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/merge-map">mergeMap()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/concat-map">concatMap()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/debounce-time">DebounceTime()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/tap">tap()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/reduce">reduce()</a>
-    <a class="btn btn-success me-2" routerLink="/operators/of">of()</a>
   </div>
   <hr>
   <router-outlet></router-outlet>
