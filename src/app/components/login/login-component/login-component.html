@@ -11,19 +11,15 @@
 
   </div>
   <br>
-
   <div>
     <label for="password">Password*</label><br>
-    <input type="password" name="password" [(ngModel)]="login.password" #password="ngModel" placeholder="Password" required>
+    <input type="password" name="password" [(ngModel)]="login.password" #password="ngModel" placeholder="Password"
+      required>
     <div *ngIf="password?.hasError('required') && password?.touched" class="validation">Password is Required.</div>
   </div>
   <br>
-
   <!-- Submit Button -->
-  <app-reusable-button-component btnClass="btn btn-success" label="Login" type="submit">
-  </app-reusable-button-component>
-
+  <app-reusable-button-component btnClass="btn btn-success" label="Login" type="submit"></app-reusable-button-component>
 </form>
 <div>
-
 </div>

@@ -21,7 +21,6 @@ export class ReusableButtonComponent {
   onClick() {
     if (this.route) {
       let fullRoute = this.routeId ? `${this.route}/${this.routeId}` : this.route;
-      console.log(fullRoute)
       this.router.navigate([fullRoute]);
     } else {
       this.clicked.emit();

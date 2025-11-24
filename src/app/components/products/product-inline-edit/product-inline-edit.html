@@ -1,3 +1,5 @@
+<a [routerLink]="['/dashboard/product/list']" routerLinkActive="active" class="btn btn-outline-success">Product List</a>
+
 <table class="table table-bordered">
   <tr>
     <th>Name</th>
@@ -6,10 +8,8 @@
     <th>Image</th>
     <th>Actions</th>
   </tr>
-
   <tr *ngFor="let row of productsForm.controls; let i = index">
     <ng-container [formGroup]="getFormGroup(i)">
-
       <!-- Name -->
       <td>
         <input *ngIf="editRowIndex === i" formControlName="name" class="form-control"
@@ -65,14 +65,12 @@
         </span>
       </td>
 
-
       <!-- Actions -->
       <td>
         <button *ngIf="editRowIndex !== i" class="btn btn-primary btn-sm" (click)="startEdit(i)">Edit</button>
         <button *ngIf="editRowIndex === i" class="btn btn-success btn-sm" (click)="save(i)">Save</button>
         <button *ngIf="editRowIndex === i" class="btn btn-secondary btn-sm ms-2" (click)="cancelEdit()">Cancel</button>
       </td>
-
     </ng-container>
   </tr>
 </table>

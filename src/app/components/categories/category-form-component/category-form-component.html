@@ -5,9 +5,7 @@
 
 <!-- form -->
 <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" novalidate>
-
   <input type="hidden" name="id" [(ngModel)]="category.id" #id="ngModel" />
-
   <div>
     <label for="name">Name*</label><br>
     <input type="text" name="name" [(ngModel)]="category.name" #name="ngModel" placeholder="Name" required>
@@ -22,5 +20,4 @@
   </button>
   <input type="reset" value="reset" *ngIf="!isEditMode" class="btn btn-danger">
   <br>
-
 </form>

@@ -44,7 +44,7 @@ export class CategoryFormComponent {
             this.router.navigate(['/dashboard/category/list']);
           }
         },
-        error: (err) => console.error('API Error:', err),
+        error: (err) => this.toast.error("Something went wrong"),
       });
     }
   }
@@ -52,7 +52,6 @@ export class CategoryFormComponent {
   onSubmit(form: NgForm) {
     if (form.valid) {
       const formData = new FormData();
-
       if (this.category.id != 0) {
         formData.append('Id', this.category.id.toString());
       }
@@ -60,7 +59,6 @@ export class CategoryFormComponent {
 
       this.categoryService.saveCategory(formData).subscribe({
         next: (data: ApiResponse<CategoryModel>) => {
-
           if (data.isSuccess) {
             sessionStorage.setItem('toastMessage', JSON.stringify(data));
             this.router.navigate(['/dashboard/category/list']);
@@ -68,11 +66,10 @@ export class CategoryFormComponent {
             this.toast.error(data.message)
           }
         },
-        error: (err) => console.error('API Error:', err)
+        error: (err) => this.toast.error("Something went wrong")
       })
     } else {
       form.form.markAllAsTouched();
     }
   }
-
 }

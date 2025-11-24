@@ -8,9 +8,7 @@ import { getCookie } from '../../core/common-methods/cookie-helper';
 export class RoleService {
   getRole(): string | null {
     const token = getCookie("authToken")
-
     if (!token) return null;
-
     try {
       const decoded: any = jwtDecode(token);
       return decoded.role;

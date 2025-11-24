@@ -11,12 +11,13 @@ import { deleteCookie } from '../../../core/common-methods/cookie-helper';
   styleUrl: './dashboard-component.css',
 })
 export class DashboardComponent {
-  constructor(public roleService: RoleService, private router: Router) { }
+  constructor(
+    public roleService: RoleService,
+    private router: Router
+  ) { }
 
   logout() {
-    console.log("sdvsdv")
     deleteCookie("authToken");
     this.router.navigate(['/login']);
   }
-
 }

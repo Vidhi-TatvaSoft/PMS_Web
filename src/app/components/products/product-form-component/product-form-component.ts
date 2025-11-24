@@ -1,7 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductModel } from '../../../core/models/product-model';
 import { ProductService } from '../../../services/product/product-service';
@@ -69,11 +68,11 @@ export class ProductFormComponent {
                 this.router.navigate(['/dashboard/product/list']);
               }
             },
-            error: (err) => console.error('API Error:', err),
+            error: (err) => this.toast.error("Something went wrong"),
           });
         }
       },
-      error: (err) => console.error('API Error:', err),
+      error: (err) => this.toast.error("Something went wrong"),
     });
   }
 
@@ -99,7 +98,6 @@ export class ProductFormComponent {
 
     // valid file
     this.isInvalidImage = false;
-
     const reader = new FileReader();
     reader.onload = () => {
       // No more ExpressionChanged errors
@@ -125,7 +123,6 @@ export class ProductFormComponent {
     this.previewUrl = null;
     this.product.imageFile = null;
     this.isInvalidImage = false;
-
     const input = document.getElementById("imageFile") as HTMLInputElement;
     if (input) {
       input.value = '';
@@ -163,7 +160,7 @@ export class ProductFormComponent {
             this.toast.error(data.message)
           }
         },
-        error: (err) => console.error('API Error:', err)
+        error: (err) => this.toast.error("Something went wrong")
       })
     } else {
       form.form.markAllAsTouched();

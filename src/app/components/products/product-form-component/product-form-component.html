@@ -1,12 +1,11 @@
 <div class="d-flex justify-content-between">
 <h3>{{ isEditMode ? 'Edit Product' : 'Add Product'}}</h3>
 <a [routerLink]="['/dashboard/product/list']" routerLinkActive="active" class="btn btn-outline-success">Product List</a>
+<a href=""></a>
 </div>
 <!-- form -->
 <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" novalidate>
-
   <input type="hidden" name="id" [(ngModel)]="product.id" #id="ngModel" />
-
   <div>
     <label for="name">Name*</label><br>
     <input type="text" name="name" [(ngModel)]="product.name" #name="ngModel" placeholder="Name" required>
@@ -58,7 +57,6 @@
     <div *ngIf="product.imagePath">
       <label>Current Image:</label><br />
       <app-reusable-image-component [imgSrc]="imageBaseUrl + product.imagePath" imgAlt="Product image" [imgHeight]="50" [imgWidth]="50"></app-reusable-image-component>
-      <!-- <img [src]="imageBaseUrl + product.imagePath" alt="Product image" height="50" width="50" /> -->
     </div>
     <label for="imageFile">Image</label><br>
     <input type="file" id="imageFile" name="imageFile" ngModel #imageFile="ngModel"  (change)="onImageChange($event)" >
@@ -69,13 +67,10 @@
     <div *ngIf="previewUrl">
       <label>Preview:</label><br />
       <app-reusable-image-component [imgSrc]="previewUrl" imgAlt="Preview" [imgHeight]="50" [imgWidth]="50"></app-reusable-image-component>
-      <!-- <img [src]="previewUrl" alt="Preview" height="50" width="50"> -->
     </div>
   </div>
   <div>
-    <app-reusable-button-component (clicked)="removeImage()" btnClass="btn btn-outline-danger" label="Remove Image" type="button">
-    </app-reusable-button-component>
-    <!-- <button type="button" (click)="removeImage()" class="btn btn-outline-danger">Remove Image</button> -->
+    <app-reusable-button-component (clicked)="removeImage()" btnClass="btn btn-outline-danger" label="Remove Image" type="button"></app-reusable-button-component>
   </div>
   <br>
 
@@ -85,14 +80,9 @@
   </div>
   <br>
 
-
   <!-- Submit Button -->
   <app-reusable-button-component  btnClass="btn btn-success" [label]="isEditMode ? 'Update Product' : 'Add Product'" type="submit">
   </app-reusable-button-component>
-  <!-- <button type="submit" class="btn btn-success">
-    {{ isEditMode ? 'Update Product' : 'Add Product' }}
-  </button> -->
   <input type="reset" value="reset" *ngIf="!isEditMode" (click)="onResetForm(productForm)" class="btn btn-danger">
   <br>
-
 </form>

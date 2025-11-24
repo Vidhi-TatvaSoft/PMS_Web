@@ -63,11 +63,9 @@ AsyncSubject emits ONLY the LAST value when complete() is called. <br>
     // SUBJECT
     if (this.selectedType === 'Subject') {
       const subject = new Subject<number>();
-
       subject.subscribe(v => this.output += `Subscriber 1: ${v}\n`);
       subject.next(1);
       subject.next(2);
-
       subject.subscribe(v => this.output += `Subscriber 2: ${v}\n`);
       subject.next(3);
       subject.complete();
@@ -76,45 +74,34 @@ AsyncSubject emits ONLY the LAST value when complete() is called. <br>
     // BEHAVIOR SUBJECT
     if (this.selectedType === 'Behavior') {
       const behavior = new BehaviorSubject<number>(100);
-
       behavior.subscribe(v => this.output += `Subscriber 1: ${v}\n`);
       behavior.next(200);
       behavior.next(300);
-
       behavior.subscribe(v => this.output += `Subscriber 2: ${v}\n`);
       behavior.next(400);
-
       behavior.complete();
     }
 
     // REPLAY SUBJECT
     if (this.selectedType === 'Replay') {
       const replay = new ReplaySubject<number>(2); // buffer size = 2
-
       replay.next(10);
       replay.next(20);
       replay.next(30);
-
       replay.subscribe(v => this.output += `Subscriber 1: ${v}\n`);
-
       replay.next(40);
-
       replay.subscribe(v => this.output += `Subscriber 2: ${v}\n`);
-
       replay.complete();
     }
 
     // ASYNC SUBJECT
     if (this.selectedType === 'Async') {
       const async = new AsyncSubject<number>();
-
       async.subscribe(v => this.output += `Subscriber 1: ${v}\n`);
       async.next(10);
       async.next(20);
-
       async.subscribe(v => this.output += `Subscriber 2: ${v}\n`);
       async.next(30);
-
       async.complete(); // emits ONLY the last value (30)
     }
   }

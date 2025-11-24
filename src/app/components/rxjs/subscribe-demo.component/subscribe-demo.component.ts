@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, output } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-subscribe-demo.component',
@@ -22,6 +22,4 @@ export class SubscribeDemoComponent {
       this.output += `unsubscribe <br>`;
     }, 5000);
   }
-
-
 }

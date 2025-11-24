@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChild, ViewChildren, ViewContainerRef, } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -27,10 +27,7 @@ export class ProductListComponent {
   products: ProductModel[] = [];
   curDate = new Date();
   fromdate = new Date(this.curDate.getFullYear(), this.curDate.getMonth(), 1);
-
-  // End of current month (23:59:59)
   toDate = new Date(this.curDate.getFullYear(), this.curDate.getMonth() + 1, 0, 23, 59, 59);
-  // filteredProducts: ProductModel[] = [];
   categories: CategoryModel[] = [];
   filters: filterModel = {
     search: null,
@@ -40,10 +37,10 @@ export class ProductListComponent {
     sortColumn: null,
     sortorder: "asc"
   }
-  // searchProduct: string = '';
-  // selectCategory = null;
+  expandedIndex: number | null = null;
+  expandData: ProductDetailModel | null = null;
   imageBaseUrl: string = environment.apiBaseUrl.replace('/api', '/')
-  private searchTimeout: any; // used for debounce timer
+  private searchTimeout: any; // for debounce timer
 
   constructor(
     private productService: ProductService,
@@ -79,13 +76,12 @@ export class ProductListComponent {
   getAllProducts() {
     this.expandedIndex = null;
     if (this.filters.fromDate && this.filters.toDate) {
-      console.log("in")
       if (this.filters.fromDate < this.filters.toDate) {
         this.productService.getAllProducts(this.filters).subscribe({
           next: (data) => {
             this.products = data;
           },
-          error: (err) => console.error('API Error:', err)
+          error: (err) => this.toast.error("Something went wrong")
         });
       } else {
         this.toast.error("fromdate must be less than todate")
@@ -95,7 +91,6 @@ export class ProductListComponent {
     } else {
       this.toast.error("Select both fromdate and two date")
     }
-
   }
 
   getAllcategories() {
@@ -103,7 +98,7 @@ export class ProductListComponent {
       next: (data) => {
         this.categories = data;
       },
-      error: (err) => console.error('API Error:', err)
+      error: (err) => this.toast.error("Something went wrong")
     })
   }
 
@@ -148,33 +143,14 @@ export class ProductListComponent {
         this.filters.search = '';
         this.filters.fromDate = this.formatDate(this.fromdate);
         this.filters.toDate = this.formatDate(this.toDate);
-
         this.getAllProducts();
       },
-      error: (err) => console.error("API Error:", err)
+      error: (err) => this.toast.error("Something went wrong.")
     })
   }
 
-  // onSearchProduct() {
-  //   let search = this.searchProduct.trim().toLowerCase();
-  //   console.log(this.selectCategory)
-  //   if (search || this.selectCategory) {
-  //     this.filteredProducts = this.products.filter(product =>
-  //       (product.name.toLowerCase().includes(search)
-  //         || product.categoryName?.toLowerCase().includes(search))
-  //       && (this.selectCategory ? product.categoryId == this.selectCategory : true));
-  //     console.log(this.filteredProducts)
-  //   } else {
-  //     this.filteredProducts = this.products;
-  //   }
-  // }
-
-  expandedIndex: number | null = null;
-  expandData: ProductDetailModel | null = null;
-
   toggle(index: number, product: ProductModel, event: MouseEvent) {
     this.expandedIndex = this.expandedIndex === index ? null : index;
-
     this.expandData = {
       stock: product.stock,
       description: product.description,
@@ -185,7 +161,6 @@ export class ProductListComponent {
     const element = event.currentTarget as HTMLElement;
     const icon = element.querySelector("i");
     if (!icon) return;
-
     if (this.expandedIndex === index) {
       icon.classList.remove("bi-caret-right-fill");
       icon.classList.add("bi-caret-down-fill");

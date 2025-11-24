@@ -1,8 +1,10 @@
 <div class="d-flex justify-content-between">
   <h3>Product list</h3>
-  <app-reusable-button-component label="Add Product" route="/dashboard/product/add"></app-reusable-button-component>
-  <!-- <a [routerLink]="['/product/add']" routerLinkActive="active" class="btn btn-outline-success">Add Product</a> -->
-
+  <div>
+    <app-reusable-button-component label="Add Product" route="/dashboard/product/add"></app-reusable-button-component>
+    <a class="btn btn-outline-info" [routerLink]="['/dashboard/product/inline-edit']"
+      routerLinkActive="router-link-active">inline product edit</a>
+  </div>
 </div>
 <br>
 
@@ -25,7 +27,7 @@
 <table class="table ">
   <thead>
     <tr>
-      <td>details</td>
+      <th>details</th>
       <th>Id</th>
       <th>Name
         <button (click)="onSort('name','asc')" data-column="name" data-order="asc">asc</button>
@@ -34,9 +36,7 @@
       <th>Price</th>
       <th>Category</th>
       <th>Image</th>
-      <th>Created At</th>
       <th>Action</th>
-
     </tr>
   </thead>
   <tbody>
@@ -47,7 +47,7 @@
     }
     @else{
     <ng-container *ngFor="let product of products; let i = index">
-      <tr >
+      <tr>
         <td (click)="toggle(i,product, $event)"><i class="bi bi-caret-right-fill cursor-pointer"></i></td>
         <td>{{product.id}}</td>
         <td>{{product.name}}</td>
@@ -62,7 +62,6 @@
           -
           }
         </td>
-        <td>{{product.createdAt | date:'dd-MM-yyyy' }}</td>
         <td>
           <app-reusable-button-component label="Edit" route="/dashboard/product/edit"
             [routeId]="product.id"></app-reusable-button-component>

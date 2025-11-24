@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginModel } from '../../core/models/login-model';
 import { ApiResponse } from '../../core/models/api-response';
 import { API_ENDPOINTS } from '../../core/constants/api-endpoints';
 

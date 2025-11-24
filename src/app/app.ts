@@ -1,9 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CustomToasterService } from './services/toaster/custom-toaster-service';
-import { ProductListComponent } from './components/products/product-list-component/product-list-component';
-import { ProductFormComponent } from './components/products/product-form-component/product-form-component';
-import { deleteCookie } from './core/common-methods/cookie-helper';
+import { Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +10,4 @@ import { deleteCookie } from './core/common-methods/cookie-helper';
 export class App {
   protected readonly title = signal('PMS_Web');
   constructor(){}
-
-
-
 }

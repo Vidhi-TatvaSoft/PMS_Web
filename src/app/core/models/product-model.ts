@@ -26,4 +26,3 @@ export interface ProductModelPartial {
   categoryId: string | number | null,
   categoryName: string | null
 }
-

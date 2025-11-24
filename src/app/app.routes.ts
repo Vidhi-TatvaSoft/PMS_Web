@@ -33,7 +33,6 @@ import { FromEventComponent } from './components/rxjs/operators/operators.compoe
 import { FromComponent } from './components/rxjs/operators/operators.compoent/creation-operators/from';
 import { IntervalComponent } from './components/rxjs/operators/operators.compoent/creation-operators/interval';
 import { TimerComponent } from './components/rxjs/operators/operators.compoent/creation-operators/timer';
-import { CategoryInlineEdit } from './components/categories/category-inline-edit/category-inline-edit';
 import { ProductInlineEdit } from './components/products/product-inline-edit/product-inline-edit';
 
 export const routes: Routes = [
@@ -59,7 +58,6 @@ export const routes: Routes = [
         component: CategoryComponent,
         children: [
           { path: 'list', component: CategoryListComponent, title: "Category List" },
-          { path: 'inline-edit', component: CategoryInlineEdit, title: "Category List" },
           { path: 'add', component: CategoryFormComponent, title: "Add Category" },
           { path: 'edit/:id', component: CategoryFormComponent, title: "Edit Category" },
           { path: '', redirectTo: 'list', pathMatch: 'full' } // default child route

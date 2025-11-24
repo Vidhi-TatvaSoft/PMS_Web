@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
     </p>
 
     <button (click)="run()">Run ajax()</button>
-
     <div class="output" *ngIf="output">
       <h4>Output:</h4>
       <pre [innerHTML]="output"></pre>

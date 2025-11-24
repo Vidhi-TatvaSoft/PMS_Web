@@ -3,7 +3,7 @@ import { ProductModel, ProductModelPartial } from '../../../core/models/product-
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../../services/product/product-service';
 import { ApiResponse } from '../../../core/models/api-response';
-import { Route, Router } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CustomToasterService } from '../../../services/toaster/custom-toaster-service';
 import { CommonModule } from '@angular/common';
 import { filterModel } from '../../../core/models/filters-model';
@@ -13,7 +13,7 @@ import { CategoryModel } from '../../../core/models/category-model';
 
 @Component({
   selector: 'app-product-inline-edit',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterLinkActive],
   templateUrl: './product-inline-edit.html',
   styleUrl: './product-inline-edit.css',
 })
@@ -40,7 +40,6 @@ export class ProductInlineEdit {
   constructor(private fb: FormBuilder,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private router: Router,
     private toast: CustomToasterService
   ) {
     this.productsForm = this.fb.array([]);
@@ -78,6 +77,20 @@ export class ProductInlineEdit {
   }
 
   startEdit(index: number) {
+    // reset another row if its in edit mode
+    if (this.editRowIndex !== null && this.editRowIndex !== index) {
+      const prevIndex = this.editRowIndex;
+      const p = this.products[prevIndex];
+
+      this.productsForm.at(prevIndex).patchValue({
+        name: p.name,
+        price: p.price,
+        categoryId: p.categoryId,
+        imageFile: null
+      });
+      this.invalidImages[prevIndex] = false;
+      this.previewUrls[prevIndex] = null;
+    }
     this.editRowIndex = index;
   }
 
@@ -90,6 +103,7 @@ export class ProductInlineEdit {
         categoryId: p.categoryId,
         imageFile: null
       });
+
       // Reset validation and preview for this row
       this.invalidImages[this.editRowIndex] = false;
       this.previewUrls[this.editRowIndex] = null;
@@ -120,7 +134,6 @@ export class ProductInlineEdit {
 
     // valid file
     this.invalidImages[index] = false;
-
     const reader = new FileReader();
     reader.onload = () => {
       this.previewUrls[index] = reader.result;
@@ -141,9 +154,7 @@ export class ProductInlineEdit {
       ...rowForm.value
     } as ProductModelPartial;
 
-    let formData: FormData | null = null;
-
-    formData = new FormData();
+    let formData: FormData | null = new FormData();
     formData.append('id', updatedProduct.id.toString());
     formData.append('name', updatedProduct.name);
     formData.append('price', updatedProduct.price.toString());
@@ -151,10 +162,12 @@ export class ProductInlineEdit {
     if (updatedProduct.imageFile) {
       formData.append('imageFile', updatedProduct.imageFile);
     }
+    if (updatedProduct.imagePath) {
+      formData.append('imagePath', updatedProduct.imagePath);
+    }
 
     this.productService.saveProduct(formData).subscribe({
       next: (data: ApiResponse<ProductModel>) => {
-
         if (data.isSuccess) {
           this.toast.success(data.message)
           this.cancelEdit();
@@ -163,7 +176,7 @@ export class ProductInlineEdit {
           this.toast.error(data.message)
         }
       },
-      error: (err) => console.error('API Error:', err)
+      error: (err) => this.toast.error("Something went wrong")
     })
   }
 

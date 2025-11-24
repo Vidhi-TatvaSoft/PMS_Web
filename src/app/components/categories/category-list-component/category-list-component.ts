@@ -7,7 +7,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ConfirmDialogComponent } from '../../../dialogbox/confirm-dialog/confirm-dialog-component/confirm-dialog-component';
 import { FormsModule } from '@angular/forms';
-import { catchError, filter } from 'rxjs';
 import { RoleService } from '../../../services/role/role-service';
 
 @Component({
@@ -16,7 +15,6 @@ import { RoleService } from '../../../services/role/role-service';
   templateUrl: './category-list-component.html',
   styleUrl: './category-list-component.css',
 })
-
 
 export class CategoryListComponent {
   categories: CategoryModel[] = [];
@@ -53,7 +51,7 @@ export class CategoryListComponent {
         this.categories = data;
         this.filteredCategories = data;
       },
-      error: (err) => console.error('API Error:', err)
+      error: (err) => this.toast.error("Something went wrong")
     });
   }
 
@@ -82,20 +80,16 @@ export class CategoryListComponent {
           this.toast.error(data.message);
         this.getAllCategories();
       },
-      error: (err) => console.error("API Error:", err)
+      error: (err) => this.toast.error("Something went wrong.")
     })
   }
 
   onSearchCategory() {
     let search = this.searchCategory.toLowerCase().trim();
-    console.log(search)
-    console.log("all", this.categories)
     if (search) {
-      console.log("hjh")
       this.filteredCategories = this.categories.filter(category => category.name.trim().toLowerCase().includes(search))
     } else {
       this.filteredCategories = this.categories;
     }
-    console.log("filtered", this.filteredCategories)
   }
 }
